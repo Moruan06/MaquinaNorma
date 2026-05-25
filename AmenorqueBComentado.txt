@@ -1,0 +1,9 @@
+A < B usando E como registrador booleano
+
+até B = 0
+faça (
+   se A = 0
+   então verdadeiro
+   senão A := A - 1; B := B - 1
+);
+falso
