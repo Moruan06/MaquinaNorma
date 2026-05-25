@@ -1,0 +1,36 @@
+1 ZER A 27 2       
+2 ADD B 3          
+
+3 ZER A 99 4       
+
+4 ZER B 7 5        
+5 SUB B 6
+6 ADD C 4
+
+7 ZER A 11 8       
+8 SUB A 9
+9 ADD D 10
+10 ADD E 7
+
+11 ZER E 14 12     
+12 SUB E 13
+13 ADD A 11
+
+14 ZER D 23 15     
+15 SUB D 16
+
+16 ZER C 20 17     
+17 SUB C 18
+18 ADD B 19
+19 ADD E 16
+
+20 ZER E 14 21     
+21 SUB E 22
+22 ADD C 20
+
+23 ZER C 25 24     
+24 SUB C 23
+
+25 SUB A 3         
+
+27 ADD B 99        

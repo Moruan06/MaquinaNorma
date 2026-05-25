@@ -1,0 +1,18 @@
+Fatorial de A usando B, C, D, E
+
+
+se A = 0
+então B := 1 // trata 0! = 1
+senão B := 1;
+   até A = 0
+   faça (
+      C := B;
+      D := A usando E;
+      até D = 0 // Loop principal de multiplicação: Soma B e C, D vezes
+      faça (
+         B := B + C usando E;
+         D := D - 1
+      );
+      C := 0;
+      A := A - 1
+   )
