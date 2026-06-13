@@ -1,0 +1,115 @@
+Potência - C := A^B
+
+Entrada:
+A = base
+B = expoente
+
+Saída:
+C = A^B
+
+Registradores usados:
+A = base original
+B = contador do expoente
+C = resultado
+D = acumulador da multiplicação
+E = auxiliar para restaurar registradores
+H = cópia da base
+
+Observação:
+O programa usa somente ADD, SUB e ZER.
+Não usa macro pronta de soma ou multiplicação.
+A lógica da multiplicação foi escrita diretamente no código.
+
+Algoritmo geral:
+
+1. Copiar A para H, preservando A.
+   H será usado como a base fixa da potência.
+
+2. Inicializar C := 1.
+   Isso representa o resultado inicial da potência.
+
+3. Enquanto B não for zero:
+   - Decrementar B.
+   - Fazer C := C * H.
+   - A multiplicação é feita somando H em D para cada unidade de C.
+   - H é restaurado usando E.
+   - Ao final da multiplicação, D é transferido para C.
+
+4. Quando B chegar a zero, o programa salta para 999.
+   Como o rótulo 999 não existe, a Máquina Norma encerra.
+
+Linha a linha:
+
+1 ZER A 5 2
+Se A = 0, pula para a linha 5.
+Se A != 0, vai para a linha 2 para copiar A em H.
+
+2 SUB A 3
+Decrementa A.
+
+3 ADD H 4
+Incrementa H, criando uma cópia da base.
+
+4 ADD E 1
+Incrementa E para depois restaurar A.
+Volta para testar A novamente.
+
+5 ZER E 9 6
+Se E = 0, a cópia acabou e vai para linha 9.
+Se E != 0, restaura A.
+
+6 SUB E 7
+Decrementa E.
+
+7 ADD A 5
+Restaura uma unidade em A e volta para testar E.
+
+9 ADD C 10
+Inicializa C := 1.
+
+10 ZER B 999 11
+Se B = 0, termina o programa.
+Se B != 0, inicia uma multiplicação.
+
+11 SUB B 12
+Decrementa o expoente B.
+
+12 ZER C 22 13
+Se C = 0, terminou de consumir o antigo valor de C.
+Se C != 0, continua a multiplicação.
+
+13 SUB C 14
+Remove uma unidade de C.
+
+14 ZER H 18 15
+Se H = 0, terminou de somar a base.
+Se H != 0, transfere H para D.
+
+15 SUB H 16
+Decrementa H.
+
+16 ADD D 17
+Incrementa D, acumulando o produto.
+
+17 ADD E 14
+Incrementa E para restaurar H depois.
+
+18 ZER E 12 19
+Se E = 0, H já foi restaurado e volta para testar C.
+Se E != 0, continua restaurando H.
+
+19 SUB E 20
+Decrementa E.
+
+20 ADD H 18
+Restaura uma unidade em H.
+
+22 ZER D 10 23
+Se D = 0, produto já foi transferido para C e volta para testar B.
+Se D != 0, transfere D para C.
+
+23 SUB D 24
+Decrementa D.
+
+24 ADD C 22
+Incrementa C com o produto final.
