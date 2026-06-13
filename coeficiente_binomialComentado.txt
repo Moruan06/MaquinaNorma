@@ -1,0 +1,31 @@
+Coeficiente binomial C(n,k) (A=n, B=k) usando C, D, E, F
+
+
+C := 0; D := 0; E := 0; F := 0; // Prepara registradores auxiliares
+C := 1; // Inicializa o resultado (acumulador da multiplicação)
+D := 1; // Inicializa o divisor (vai crescer de 1 até k)
+
+até B = 0 // Loop principal: executa B (k) vezes
+faça (
+   // --- Passo 1: Multiplicação (C = C * A) ---
+   E := C; // Transfere o resultado parcial atual para E (C fica zerado)
+   
+   até E = 0 // Multiplica o antigo C pelo valor atual de A através de somas sucessivas
+   faça (
+      E := E - 1;
+      C := C + A usando F // Soma A no resultado C (e restaura A intacto usando F)
+   );
+   
+   // --- Passo 2: Divisão exata (C = C / D) ---
+   até C = 0 // A matemática garante que sempre teremos uma divisão exata aqui
+   faça (
+      E := E + 1; // E é usado para acumular o quociente (começa do zero)
+      C := C - D usando F // Subtrai blocos de tamanho D da variável C (preservando D usando F)
+   );
+   C := E; // O quociente passa a ser o novo resultado parcial
+   
+   // --- Passo 3: Atualiza variáveis para a próxima iteração ---
+   A := A - 1; // Próximo fator do numerador (ex: n-1, n-2, ...)
+   D := D + 1; // Próximo fator do denominador (ex: 2, 3, ...)
+   B := B - 1  // Decrementa o iterador principal (k)
+)
