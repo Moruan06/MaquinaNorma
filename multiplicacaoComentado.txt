@@ -1,0 +1,13 @@
+Multiplicação de A por B usando C, D (A := A * B)
+
+
+C := 0;
+D := 0; // Prepara os registradores auxiliares
+
+C := A; // Transfere o valor original de A para C (A fica zerado e C vira o iterador)
+
+até C = 0 // Loop principal: vai repetir "A" vezes
+faça (
+   C := C - 1; // Decrementa o iterador
+   A := A + B usando D // Adiciona B em A e preserva o valor de B usando a variável auxiliar D
+)
