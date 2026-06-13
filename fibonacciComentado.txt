@@ -1,0 +1,117 @@
+Fibonacci Iterativo
+
+Entrada:
+A = n
+
+Saída:
+B = fib(n)
+
+Consideração:
+fib(0) = 0
+fib(1) = 1
+fib(n) = fib(n-1) + fib(n-2)
+
+Registradores usados:
+A = contador n
+B = valor atual de Fibonacci que será a resposta final
+C = próximo valor da sequência
+D = auxiliar usado para soma
+
+Observação:
+O programa usa somente ADD, SUB e ZER.
+Não usa macro pronta de soma.
+A soma B + C é feita diretamente no código.
+
+Algoritmo geral:
+
+1. Inicializar C := 1.
+   B começa como 0, pois os registradores devem ser inicializados com zero.
+
+2. Enquanto A não for zero:
+   - Decrementar A.
+   - Fazer D := B + C.
+   - Fazer B := C.
+   - Fazer C := D.
+
+3. Ao final, B contém fib(n).
+
+Exemplo:
+Entrada A = 5
+
+Inicial:
+B = 0
+C = 1
+
+Iteração 1:
+D = 0 + 1 = 1
+B = 1
+C = 1
+
+Iteração 2:
+D = 1 + 1 = 2
+B = 1
+C = 2
+
+Iteração 3:
+D = 1 + 2 = 3
+B = 2
+C = 3
+
+Iteração 4:
+D = 2 + 3 = 5
+B = 3
+C = 5
+
+Iteração 5:
+D = 3 + 5 = 8
+B = 5
+C = 8
+
+Resultado:
+B = 5
+
+Linha a linha:
+
+1 ADD C 2
+Inicializa C := 1.
+
+2 ZER A 999 3
+Se A = 0, termina.
+Se A != 0, continua o cálculo.
+
+3 SUB A 4
+Decrementa A, funcionando como contador de iteração.
+
+4 ZER B 7 5
+Se B = 0, termina a transferência de B para D.
+Se B != 0, transfere uma unidade de B para D.
+
+5 SUB B 6
+Decrementa B.
+
+6 ADD D 4
+Incrementa D.
+Volta para testar B.
+
+7 ZER C 11 8
+Se C = 0, terminou de transferir C.
+Se C != 0, transfere C para D e também para B.
+
+8 SUB C 9
+Decrementa C.
+
+9 ADD D 10
+Incrementa D, formando D := B + C.
+
+10 ADD B 7
+Incrementa B para receber o antigo valor de C.
+
+11 ZER D 2 12
+Se D = 0, terminou a atualização e volta para testar A.
+Se D != 0, transfere D para C.
+
+12 SUB D 13
+Decrementa D.
+
+13 ADD C 11
+Incrementa C com o novo valor da sequência.
