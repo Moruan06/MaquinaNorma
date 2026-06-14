@@ -1,0 +1,6 @@
+1 ZER A 2 3
+2 ZER B 7 5
+3 SUB A 4
+4 ADD C 1
+5 SUB B 6
+6 ADD C 2
