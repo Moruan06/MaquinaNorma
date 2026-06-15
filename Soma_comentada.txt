@@ -1,6 +1,21 @@
-1 ZER A 2 3      ; Testa A. Se A = 0, vai para 2 para começar a processar B; senão, vai para 3.
-2 ZER B 7 5      ; Testa B. Se B = 0, a soma terminou e o programa encerra em 7; senão, vai para 5.
-3 SUB A 4        ; Decrementa A em 1, retirando uma unidade de A.
-4 ADD C 1        ; Incrementa C em 1, transferindo para C a unidade retirada de A, e volta para 1.
-5 SUB B 6        ; Decrementa B em 1, retirando uma unidade de B.
-6 ADD C 2        ; Incrementa C em 1, transferindo para C a unidade retirada de B, e volta para 2.
+Soma de A usando B e C
+
+se A = 0
+então processa B
+senão (
+   A := A - 1;
+   C := C + 1
+)
+
+até B = 0
+faça (
+   B := B - 1;
+   C := C + 1
+)
+
+1 ZER A 2 3      ; se A = 0 então processa B; senão transfere uma unidade de A para C
+2 ZER B 7 5      ; se B = 0 então termina; senão transfere uma unidade de B para C
+3 SUB A 4        ; A := A - 1
+4 ADD C 1        ; C := C + 1
+5 SUB B 6        ; B := B - 1
+6 ADD C 2        ; C := C + 1

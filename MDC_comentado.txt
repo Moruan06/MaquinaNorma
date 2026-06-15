@@ -1,35 +1,102 @@
-1  ZER C 3 2      ; Testa se C já está zerado. Se C = 0, vai para 3; senão, vai para 2.
-2  SUB C 1        ; Decrementa C e volta para 1, repetindo até zerar C.
+MDC de A e B usando C e D
 
-3  ZER D 5 4      ; Testa se D já está zerado. Se D = 0, vai para 5; senão, vai para 4.
-4  SUB D 3        ; Decrementa D e volta para 3, repetindo até zerar D.
+C := 0;    // garante que C começa vazio
+D := 0;    // garante que D começa vazio
 
-5  ZER B 22 6     ; Testa B. Se B = 0, o MDC está em A e o programa vai copiá-lo para C em 22.
-6  ZER A 25 7     ; Testa A. Se A = 0, o MDC está em B e o programa vai copiá-lo para C em 25.
+até A = 0 ou B = 0
+faça (
+   
+   // cálculo de A mod B por subtrações sucessivas
 
-7  ZER B 12 8     ; Durante o cálculo de A mod B, testa B. Se B = 0, uma subtração completa foi feita e B deve ser restaurado em 12.
-8  ZER A 15 9     ; Testa A. Se A = 0 antes de B, terminou a comparação e começa a reorganização dos valores em 15.
-9  SUB A 10       ; Decrementa A em 1 como parte da subtração simultânea entre A e B.
-10 SUB B 11       ; Decrementa B em 1 como parte da mesma subtração.
-11 ADD D 7        ; Incrementa D para registrar quantas unidades foram retiradas de B e volta ao teste em 7.
+   até B = 0 ou A = 0
+   faça (
+      A := A - 1;
+      B := B - 1;
+      D := D + 1
+   );
 
-12 ZER D 5 13     ; Testa D. Se D = 0, B já foi restaurado e volta ao início do algoritmo em 5.
-13 SUB D 14       ; Decrementa D em 1 para retirar uma unidade do contador auxiliar.
-14 ADD B 12       ; Incrementa B em 1, restaurando o valor original de B, e volta para 12.
+   se B = 0
+   então (
+      // restaura B usando D
+      até D = 0
+      faça (
+         D := D - 1;
+         B := B + 1
+      )
+   )
 
-15 ZER B 18 16    ; Transfere para A a parte restante de B. Se B = 0, segue para 18.
-16 SUB B 17       ; Decrementa B em 1 durante a transferência.
-17 ADD A 15       ; Incrementa A em 1 e volta para 15, concluindo a transferência de B para A.
+   senão (
+      // A chegou a 0 antes de B
+      // reorganiza os valores:
+      // A recebe o antigo B
+      // B recebe o resto da divisão
 
-18 ZER D 5 19     ; Testa D. Se D = 0, a reorganização terminou e volta ao início do algoritmo em 5.
-19 SUB D 20       ; Decrementa D em 1.
-20 ADD A 21       ; Incrementa A em 1 para completar em A o antigo valor de B.
-21 ADD B 18       ; Incrementa B em 1 para guardar o resto A mod B e volta para 18.
+      até B = 0
+      faça (
+         B := B - 1;
+         A := A + 1
+      );
 
-22 ZER A 28 23    ; Caso B = 0, testa A. Se A = 0, a cópia terminou e o programa encerra em 28.
-23 SUB A 24       ; Decrementa A em 1 durante a transferência do resultado.
-24 ADD C 22       ; Incrementa C em 1, copiando o MDC de A para C, e volta para 22.
+      até D = 0
+      faça (
+         D := D - 1;
+         A := A + 1;
+         B := B + 1
+      )
+   )
+);
 
-25 ZER B 28 26    ; Caso A = 0, testa B. Se B = 0, a cópia terminou e o programa encerra em 28.
-26 SUB B 27       ; Decrementa B em 1 durante a transferência do resultado.
-27 ADD C 25       ; Incrementa C em 1, copiando o MDC de B para C, e volta para 25.
+se B = 0
+então (
+   // o MDC está em A
+   até A = 0
+   faça (
+      A := A - 1;
+      C := C + 1
+   )
+)
+
+senão (
+   // o MDC está em B
+   até B = 0
+   faça (
+      B := B - 1;
+      C := C + 1
+   )
+)
+
+1  ZER C 3 2      ; se C ≠ 0 então C := C - 1 até zerar C
+2  SUB C 1        ; continua zerando C
+
+3  ZER D 5 4      ; se D ≠ 0 então D := D - 1 até zerar D
+4  SUB D 3        ; continua zerando D
+
+5  ZER B 22 6     ; se B = 0 então o MDC está em A; senão continua
+6  ZER A 25 7     ; se A = 0 então o MDC está em B; senão continua
+
+7  ZER B 12 8     ; testa se a subtração simultânea terminou
+8  ZER A 15 9     ; se A zerar antes de B inicia reorganização dos valores
+9  SUB A 10       ; A := A - 1
+10 SUB B 11       ; B := B - 1
+11 ADD D 7        ; D := D + 1 usando D como contador auxiliar
+
+12 ZER D 5 13     ; se D = 0 então B já foi restaurado
+13 SUB D 14       ; D := D - 1
+14 ADD B 12       ; B := B + 1 restaurando o divisor
+
+15 ZER B 18 16    ; transfere o restante de B para A
+16 SUB B 17       ; B := B - 1
+17 ADD A 15       ; A := A + 1
+
+18 ZER D 5 19     ; termina a reorganização quando D = 0
+19 SUB D 20       ; D := D - 1
+20 ADD A 21       ; A := A + 1
+21 ADD B 18       ; B := B + 1 guardando o resto
+
+22 ZER A 28 23    ; copia A para C quando B = 0
+23 SUB A 24       ; A := A - 1
+24 ADD C 22       ; C := C + 1
+
+25 ZER B 28 26    ; copia B para C quando A = 0
+26 SUB B 27       ; B := B - 1
+27 ADD C 25       ; C := C + 1

@@ -1,11 +1,19 @@
+Divisão de A por B usando C e D
 
-1  ZER B 7 2      ; Testa B durante a subtração. Se B = 0, uma cópia completa do divisor foi retirada de A e vai para 7; senão, vai para 2.
-2  ZER A 10 3     ; Testa A. Se A = 0 antes de B, não é possível realizar outra subtração completa e o programa encerra em 10; senão, vai para 3.
-3  SUB A 4        ; Decrementa A em 1, retirando uma unidade do dividendo.
-4  SUB B 5        ; Decrementa B em 1, retirando uma unidade da cópia de trabalho do divisor.
-5  ADD D 1        ; Incrementa D em 1 para registrar a unidade retirada de B e volta ao teste da linha 1.
+até não ser possível retirar uma cópia completa de B de A
+faça (
+   retira uma cópia de B de A usando D;
+   restaura B usando D;
+   C := C + 1
+)
 
-6  ADD B 7        ; Incrementa B em 1, restaurando uma unidade do divisor, e volta para testar D na linha 7.
-7  ZER D 9 8      ; Testa D. Se D = 0, B já foi totalmente restaurado e vai para 9; senão, vai para 8.
-8  SUB D 6        ; Decrementa D em 1 e segue para 6, transferindo essa unidade de volta para B.
-9  ADD C 1        ; Incrementa C em 1, registrando uma subtração completa de B em A, e reinicia o processo na linha 1.
+1 ZER B 7 2      ; se B = 0 então restaura o divisor; senão continua retirando unidades de A e B
+2 ZER A 10 3     ; se A = 0 antes de B então encerra; senão continua a subtração
+3 SUB A 4        ; A := A - 1
+4 SUB B 5        ; B := B - 1
+5 ADD D 1        ; D := D + 1 (registra unidade retirada de B)
+
+6 ADD B 7        ; B := B + 1 (restauração do divisor)
+7 ZER D 9 8      ; se D = 0 então divisor restaurado; senão continua restaurando
+8 SUB D 6        ; D := D - 1
+9 ADD C 1        ; C := C + 1 (contabiliza uma subtração completa)
