@@ -1,0 +1,35 @@
+Teste se é Primo (A = n) usando B, C, D, E, F, G
+
+se A = 0 então fim; // Casos especiais iniciais: 0 e 1 não são primos
+se A = 1 então fim; 
+se A = 2 então verdadeiro; // 2 e 3 são primos diretos
+se A = 3 então verdadeiro;
+
+E := A; // Transfere o valor original de A para E (preservando o número)
+C := 2; // Inicializa o primeiro divisor a ser testado
+
+até C = E // Loop principal: testa os divisores até o C alcançar o próprio número E
+faça (
+   D := E; // Copia E para D para servir como o dividendo consumível do resto
+
+   // --- Cálculo do Resto da Divisão (D mod C) ---
+   até D = 0 
+   faça (
+      se D = 0 então fim; // Divisão exata encontrada fora do subloop -> Não é primo (B=0)
+      
+      F := C usando G; // Clona o divisor C em F para a rodada corrente de subtração
+      
+      até F = 0
+      faça (
+         se D = 0 então proximo_divisor; // Se D zerar no meio do bloco, sobrou resto
+         D := D - 1;
+         F := F - 1
+      )
+   );
+
+   proximo_divisor:
+   C := C + 1 // Incrementa o divisor se a rodada anterior falhou em dividir exatamente
+)
+
+verdadeiro:
+B := 1 // Se o loop esgotar sem nenhuma divisão exata, o número é primo

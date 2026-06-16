@@ -1,0 +1,48 @@
+# Objetivo: calcular A mod B
+# Entrada:  A, B (B > 0)
+# Saida:    C = A mod B (resto da divisao inteira de A por B), B = preservado
+#
+# Interpretacao: C = A - B * (A // B)
+#   Se A < B: C = A
+#   Se A >= B: subtrair B repetidamente ate A < B
+#
+# Este programa e identico a divisao_resto.txt, com a diferenca que
+# o resultado principal e o RESTO (C) em vez do quociente.
+# O quociente vai para D (descartado).
+#
+# Registradores auxiliares: D = quociente (descartado), E = copia de B,
+#                            F = A salvo por iteracao, G = temp
+
+# Copiar A para F (salvar estado de A) usando E como temp; restaurar A
+1  ZER A 10 2
+2  SUB A 3
+3  ADD F 4
+4  ADD E 1
+10 ZER E 15 11
+11 SUB E 12
+12 ADD A 10
+
+# Copiar B para E usando G; restaurar B
+15 ZER B 19 16
+16 SUB B 17
+17 ADD E 18
+18 ADD G 15
+19 ZER G 22 20
+20 SUB G 21
+21 ADD B 19
+
+# Tentar subtrair E de A
+22 ZER E 40 23
+23 ZER A 35 24
+24 SUB A 25
+25 SUB E 22
+
+# Sucesso: D++ (quociente descartado), zerar F, reiniciar
+40 ADD D 41
+41 ZER F 1 42
+42 SUB F 41
+
+# Falha: C = F (este e o RESTO, que e o resultado desejado)
+35 ZER F 99 36
+36 SUB F 37
+37 ADD C 35
